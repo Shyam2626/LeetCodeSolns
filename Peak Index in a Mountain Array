@@ -1,0 +1,11 @@
+/* daily challenge 25/07/23 */
+
+class Solution {
+    public int peakIndexInMountainArray(int[] arr) {
+        ArrayList<Integer> a=new ArrayList<>();
+        for(int num : arr) a.add(num);
+        int value=Collections.max(a);
+        int idx=a.indexOf(value);
+        return idx;
+    }
+}

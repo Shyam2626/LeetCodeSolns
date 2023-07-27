@@ -1,0 +1,30 @@
+/* Daily challenge 26/007/2023 */
+/* problem no : 1870 */
+
+class Solution {
+    public int minSpeedOnTime(int[] dist, double hour) {
+        int st=1,end=10000000,min=-1;
+
+        while(st<=end){
+            int md=st+(end-st)/2;
+            double t=Calculate(md,dist);
+            if(t<=hour){
+                min=md;
+                end=min-1;
+            }
+            else{
+                st=md+1;
+            }
+        }
+        return min;
+    }
+
+    public double Calculate(int s,int dist[]){
+        double time=0;
+        for(int i=0;i<dist.length;i++){
+            double t=(double)dist[i]/(double)s;
+            time+=(i==dist.length-1)?t:Math.ceil(t);
+        }
+        return time;
+    }
+}

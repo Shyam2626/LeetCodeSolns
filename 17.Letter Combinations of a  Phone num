@@ -1,0 +1,37 @@
+class Solution {
+
+    static void Backtrack(Map<Character,String> map,List<String> ans,String digits,int  index,String currString){
+
+        if(currString.length()==digits.length()){
+            ans.add(currString);
+            return;
+        }
+
+        char c=digits.charAt(index);
+        String letters=map.get(c);
+
+        for (char letter : letters.toCharArray()) {
+            Backtrack(map, ans, digits,index+1,currString+letter);
+        }
+
+    }
+
+    public List<String> letterCombinations(String digits) {
+        ArrayList<String> ans=new ArrayList<>();
+        if(digits.length()==0){
+            return ans;
+        }
+        Map<Character,String> map=new HashMap<>();
+        map.put('2',"abc");
+        map.put('3',"def");
+        map.put('4',"ghi");
+        map.put('5',"jkl");
+        map.put('6',"mno");
+        map.put('7',"pqrs");
+        map.put('8',"tuv");
+        map.put('9',"wxyz");
+
+        Backtrack(map,ans,digits,0,"");
+        return ans;
+    }
+}

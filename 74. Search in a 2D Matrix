@@ -1,0 +1,15 @@
+class Solution {
+    public boolean searchMatrix(int[][] mat, int t) {
+        int m=mat.length;
+        int n=mat[0].length;
+        for(int i=0;i<m;i++){
+            int left=mat[i][0],right=mat[i][n-1];
+            if(left<=t && right>=t){
+                for(int j=0;j<n;j++){
+                    if(mat[i][j]==t) return true;
+                }
+            }
+        }
+        return false;
+    }
+}

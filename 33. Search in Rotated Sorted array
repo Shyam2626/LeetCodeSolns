@@ -1,0 +1,15 @@
+class Solution {
+    public int search(int[] arr, int t) {
+
+        ArrayList<Integer> num=new ArrayList<>();
+        for(int n: arr){
+            if(n==t){
+                return num.size();
+            }
+            else num.add(n);
+        }
+
+        return -1;
+       
+    }
+}

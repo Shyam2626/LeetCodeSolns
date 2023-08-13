@@ -1,24 +1,25 @@
 class Solution {
 
-    static void dfs(int[] nums,ArrayList<Integer> pl,List<List<Integer>> str){
-        if(pl.size()==nums.length){
-            str.add(new ArrayList<>(pl));
-            return;
-        }
-        
-        for(int i=0;i<nums.length;i++){
-            if(!pl.contains(nums[i])){
-                pl.add(nums[i]);
-                dfs(nums,pl,str);
-                pl.remove(pl.size()-1);
-            }
-        }
-    }
 
     public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> ans=new ArrayList<>();
+        Permutations(nums,new ArrayList<>(),ans);
+        return ans;
+    }
+
+    private static void Permutations(int[] arr,List<Integer> list,List<List<Integer>> ans){
         
-        List<List<Integer>> str=new ArrayList<>();
-        dfs(nums,(new ArrayList<>()),str);
-        return str;
+        if(list.size()==arr.length){
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+
+        for(int i=0;i<arr.length;i++){
+            if(!list.contains(arr[i])){
+                list.add(arr[i]);
+                Permutations(arr,list,ans);
+                list.remove(list.size()-1);
+            }
+        }
     }
 }

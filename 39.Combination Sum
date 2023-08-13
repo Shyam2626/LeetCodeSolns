@@ -1,0 +1,26 @@
+class Solution {
+
+    private static void findCombinations(int ind,int[] arr,int t,List<List<Integer>> ans,List<Integer> ds){
+
+        if(ind==arr.length){
+            if(t==0){
+                ans.add(new ArrayList<>(ds));
+            }
+            return;
+        }
+
+        if(arr[ind]<=t){
+            ds.add(arr[ind]);
+            findCombinations(ind,arr,t-arr[ind],ans,ds);
+            ds.remove(ds.size()-1);
+        }
+        findCombinations(ind+1,arr,t,ans,ds);
+
+    }
+
+    public List<List<Integer>> combinationSum(int[] arr, int t) {
+        List<List<Integer>> ans=new ArrayList<>();
+        findCombinations(0,arr,t,ans,new ArrayList<>());
+        return ans;
+    }
+}

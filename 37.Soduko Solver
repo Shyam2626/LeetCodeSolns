@@ -1,0 +1,35 @@
+class Solution {
+    public void solveSudoku(char[][] board) {
+        Solve(board);
+    }
+
+    private static boolean Solve(char[][] board){
+        
+        for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+                if(board[i][j]=='.'){
+                    for(char count='1';count<='9';count++){
+                        if(isValid(i,j,board,count)){
+                            board[i][j]=count;
+                            if(Solve(board))
+                                return true;
+                            else board[i][j]='.';
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private static boolean isValid(int row,int col,char[][] board,char count){
+
+        for(int i=0;i<9;i++){
+            if(board[i][col]==count) return false;
+            else if(board[row][i]==count) return false;
+            else if(board[3*(row/3)+i/3][3*(col/3)+i%3]==count) return false;
+        }
+        return true;
+    }
+}

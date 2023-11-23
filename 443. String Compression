@@ -1,0 +1,44 @@
+class Solution {
+    public int compress(char[] ch) {
+
+        if(ch.length==1){
+            ch[0]=ch[0];
+            return ch.length;
+        }
+
+        int len=ch.length,c=0;
+        String s="";
+
+        for(int i=0;i<len-1;i++){
+
+            if(ch[i]!=ch[i+1] && c==0) s+=ch[i];
+
+            else if(ch[i]!=ch[i+1] && c!=0){
+                s=s+ch[i]+(c+"");
+                c=0;
+            }
+
+            else if(ch[i]==ch[i+1]){
+                if(c==0) c+=2;
+                else c++;
+            }
+
+        }
+
+        try{
+            if(ch[len-1]==ch[len-2]){
+                s+=ch[len-1]+(c+"");
+            }
+        }catch(Exception e){}
+
+        try{
+            if(ch[len-1]!=ch[len-2]){
+                s+=ch[len-1];
+            }
+        }catch(Exception e){}
+
+        for(int i=0;i<s.length();i++) ch[i]=s.charAt(i);
+        return s.length();
+        
+    }
+}

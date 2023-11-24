@@ -1,0 +1,22 @@
+class Solution {
+    public boolean isSubsequence(String s, String t) {       
+        int idx=0;
+        
+        for(int i=0;i<t.length();i++){
+
+            if(idx==s.length()) return true;
+
+            char ch=t.charAt(i);
+
+            if(!t.contains(ch+"")) return false;
+
+            if(s.charAt(idx)==ch){
+                idx++;
+            }
+
+        }
+        
+        return (idx==s.length());
+
+    }
+}

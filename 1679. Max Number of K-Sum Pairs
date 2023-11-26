@@ -1,0 +1,23 @@
+class Solution {
+    public int maxOperations(int[] nums, int k) {
+
+        // Two Pointers Approach
+        // Time Complexity : o(nlogn) + O(n);
+
+        int l=0,r=nums.length-1,c=0;
+        Arrays.sort(nums);
+        while(l<r){
+            if(nums[l]+nums[r]<k) l++;
+            else if(nums[l]+nums[r]>k) r--;
+            else{
+                c++;
+                l++;
+                r--;
+            }
+        }
+        return c;
+    }
+        
+
+       
+}

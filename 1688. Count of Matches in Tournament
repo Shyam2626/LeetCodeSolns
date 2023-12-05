@@ -11,6 +11,8 @@ class Solution {
             }
         }
         return matches;
+
+// (or) simply return n-1;
         
     }
 }

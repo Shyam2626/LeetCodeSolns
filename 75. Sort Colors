@@ -1,0 +1,35 @@
+class Solution {
+
+   
+    public void sortColors(int[] nums) {
+
+    //      Brute Force Approach
+    //     for(int i=0;i<nums.length;i++){
+    //         for(int j=i+1;j<nums.length;j++){
+    //             if(nums[i]>nums[j]) swap(nums,i,j);
+    //         }
+    //     }
+    // }
+    // static void swap(int[] num,int i,int j){
+    //     int temp=num[i];
+    //     num[i]=num[j];
+    //     num[j]=temp;
+    // }
+
+    int one=-1,two=-1,zero=-1;
+
+    for(int i=0;i<nums.length;i++){
+        if(nums[i]==0){
+            nums[++two]=2;
+            nums[++one]=1;
+            nums[++zero]=0;
+        }else if(nums[i]==1){
+            nums[++two]=2;
+            nums[++one]=1;
+        }else{
+            nums[++two]=2;
+        }
+    }
+
+    }
+}

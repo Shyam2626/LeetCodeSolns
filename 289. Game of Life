@@ -1,0 +1,34 @@
+class Solution {
+    public void gameOfLife(int[][] board) {
+
+       int m=board.length,n=board[0].length;
+       int nextState[][]=new int[m][n];
+
+       for(int i=0;i<m;i++){
+           for(int j=0;j<n;j++){
+               int count=liveCount(board,i,j,m,n);
+               if(board[i][j]==1){
+                   nextState[i][j]=(count<2 || count>3)?0:1;
+               }else{
+                   nextState[i][j]=(count==3)?1:0;
+               }
+           }
+       }
+
+       for(int i=0;i<m;i++)
+        for(int j=0;j<n;j++)
+            board[i][j]=nextState[i][j];
+    }
+
+    static int liveCount(int[][] board,int r,int c,int m,int n){
+        int arr1[]={-1, -1, -1, 0, 0, 1, 1, 1};
+        int arr2[]={-1, 0, 1, -1, 1, -1, 0, 1};
+        int count=0;
+        for(int i=0;i<8;i++){
+            int nr=r+arr1[i],nc=c+arr2[i];
+            if(nr>=0 && nr<m && nc>=0 && nc<n && board[nr][nc]==1)
+                count++;
+        }
+        return count;
+    }
+}

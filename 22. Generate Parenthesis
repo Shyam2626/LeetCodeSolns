@@ -1,0 +1,27 @@
+class Solution {
+    public List<String> generateParenthesis(int n) {
+
+        List<String> list=new ArrayList<>();
+        dfs(list,n,n,new StringBuilder());
+        return list;
+        
+    }
+
+    static void dfs(List<String> list,int l,int r,StringBuilder sb){
+        if(l==0 && r==0){
+            list.add(sb.toString());
+            return;
+        }
+
+        if(l>0){
+            sb.append("(");
+            dfs(list,l-1,r,sb);
+            sb=sb.deleteCharAt(sb.length()-1);
+        }
+        if(l<r){
+            sb.append(")");
+            dfs(list,l,r-1,sb);
+            sb=sb.deleteCharAt(sb.length()-1);
+        }
+    }
+}

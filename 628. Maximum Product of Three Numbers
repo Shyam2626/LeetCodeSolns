@@ -1,0 +1,15 @@
+class Solution {
+    public int maximumProduct(int[] nums) {
+
+        Arrays.sort(nums);
+
+        int firstLowest=nums[0],secondLowest=nums[1];
+        int firstLargest=nums[nums.length-1],secondLargest=nums[nums.length-2];
+
+        int negPro=firstLowest*secondLowest;
+        int posPro=firstLargest*secondLargest;
+
+        return Math.max(negPro*firstLargest,posPro*nums[nums.length-3]);
+        
+    }
+}

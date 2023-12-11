@@ -1,0 +1,18 @@
+class Solution {
+    public void rotate(int[][] matrix) {
+
+        int n=matrix.length,r=n-1;
+        int temp[][]=new int[n][n];
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                temp[i][j]=matrix[r-j][i];
+            }
+        }
+
+        for(int i=0;i<n;i++){
+            System.arraycopy(temp[i],0,matrix[i],0,n);
+        }
+        
+    }
+}

@@ -1,0 +1,23 @@
+class Solution {
+    public int findSpecialInteger(int[] arr) {
+
+        Map<Integer,Integer> m=new HashMap<>();
+
+        for(int num: arr){
+            if(m.containsKey(num)) m.put(num,m.get(num)+1);
+            else m.put(num,1);
+        }
+
+        int max=0,count=0;
+
+        for(int num : m.keySet()){
+            if(m.get(num)>count){
+                count=m.get(num);
+                max=num;
+            }
+        }
+
+        return max;
+        
+    }
+}

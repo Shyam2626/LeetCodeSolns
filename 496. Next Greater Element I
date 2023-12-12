@@ -1,0 +1,26 @@
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        
+        int ans[]=new int[nums1.length];
+        int idx=0;
+
+        List<Integer> l1=Arrays.stream(nums2).boxed().collect(Collectors.toList());
+
+        for( int num : nums1 ){
+            int index=l1.indexOf(num);
+            boolean flag=true;
+            for(int j=index+1;j<nums2.length;j++){
+                if(nums2[j]>num){
+                    ans[idx++]=nums2[j];
+                    flag=false;
+                    break;
+                }
+            }
+            if(flag) ans[idx++]=-1;
+            
+        }
+        return ans;
+
+        
+    }
+}

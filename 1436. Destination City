@@ -1,0 +1,20 @@
+class Solution {
+    public String destCity(List<List<String>> paths) {
+
+        List<String> left=new ArrayList<>();
+        List<String> right=new ArrayList<>();
+
+        for( List<String> innerList : paths )
+            for(int i=0;i<1;i++){
+                left.add(innerList.get(0));
+                right.add(innerList.get(1));
+            }
+        
+        for( String str : right )
+            if(!left.contains(str))
+                return str;
+        
+        return "";
+
+    }
+}

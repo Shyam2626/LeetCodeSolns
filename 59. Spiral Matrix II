@@ -1,0 +1,29 @@
+class Solution {
+    public int[][] generateMatrix(int n) {
+
+        int mat[][]=new int[n][n];
+
+        int count=1;
+        int r1=0,r2=n-1,c1=0,c2=n-1;
+
+        while(count<=n*n){
+            for( int i=c1;i<=c2;i++)
+                mat[r1][i]=count++;
+            if(count>n*n) break;
+            for(int i=r1+1;i<=r2;i++)
+                mat[i][c2]=count++;
+            if(count>n*n) break;
+            for(int i=c2-1;i>=c1;i--)
+                mat[r2][i]=count++;
+            if(count>n*n) break;
+            for(int i=r2-1;i>=r1+1;i--)
+                mat[i][c1]=count++;
+            if(count>n*n) break;
+            r1++;
+            c1++;
+            r2--;
+            c2--;
+        }
+        return mat;   
+    }
+}

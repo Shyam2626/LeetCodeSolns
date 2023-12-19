@@ -39,7 +39,7 @@ class Solution {
                 if(currNode.right!=null)
                     q.offer(currNode.right);
             }
-            ans.add(currList);
+            ans.add(currList); // Or use ans.add(0,currList) so sort is reverse() is required
 
         }
 

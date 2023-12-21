@@ -1,0 +1,20 @@
+class Solution {
+    public int maxWidthOfVerticalArea(int[][] points) {
+
+        int n=points.length;
+
+        int sortedArray[]=new int[n];
+        int ans=0;
+
+        for(int i=0;i<n;i++)
+            sortedArray[i]=points[i][0];
+
+        Arrays.sort(sortedArray);
+
+        for(int i=1;i<n;i++)
+            ans=Math.max(ans,sortedArray[i]-sortedArray[i-1]);
+
+        return ans;
+        
+    }
+}

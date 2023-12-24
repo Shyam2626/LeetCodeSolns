@@ -1,0 +1,16 @@
+class Solution {
+    public int minOperations(String s) {
+
+        int len=s.length();
+        
+        int countOf10=0,countOf01=0;
+
+        for(int i=0;i<s.length();i++)
+            if(s.charAt(i)-'0'==i%2)
+                countOf01++;
+
+        countOf10=len-countOf01;
+
+        return Math.min(countOf10,countOf01);
+    }
+}

@@ -1,0 +1,40 @@
+class Solution {
+    public int findCircleNum(int[][] mat) {
+
+        int provinces=0;
+        List<List<Integer>> adj=new ArrayList<>();
+        int n=mat.length;
+
+        for(int i=0;i<n;i++)
+            adj.add(new ArrayList<>());
+
+        boolean visited[]=new boolean[n];
+
+        //Creation of Adjacency List
+        for(int i=0;i<n;i++)
+            for(int j=0;j<n;j++)
+                if(mat[i][j]==1 && i!=j){
+                    adj.get(i).add(j);
+                    adj.get(j).add(i);
+                }
+
+        for(int i=0;i<n;i++){
+            if(!visited[i]){
+                provinces++;
+                findProvinces(adj,visited,i);
+            }
+        }
+        return provinces;
+    }
+
+    void findProvinces(List<List<Integer>> adj,boolean[] visited,int node){
+        List<Integer> currList=adj.get(node);
+        visited[node]=true;
+
+        for(int num : currList){
+            if(!visited[num]){
+                findProvinces(adj,visited,num);
+            }
+        }
+    }
+}

@@ -1,0 +1,40 @@
+class Pair{
+    String key;
+    int value;
+    Pair(String key,int value){
+        this.key=key;
+        this.value=value;
+    }
+}
+
+class Solution {
+    public List<String> topKFrequent(String[] words, int k) {
+
+        List<String> ans=new ArrayList<>();
+        List<Pair> list=new ArrayList<>();
+        Map<String,Integer> map=new HashMap<>();
+
+        for(String s : words)
+            map.put(s,map.getOrDefault(s,0)+1);
+        
+        for(String s :map.keySet())
+            list.add(new Pair(s,map.get(s)));
+
+        Collections.sort(list,new Comparator<Pair>(){
+            @Override
+            public int compare(Pair p1,Pair p2){
+              if (p1.value != p2.value) {
+                    return Integer.compare(p2.value, p1.value);
+                } else {
+                    return p1.key.compareTo(p2.key);
+                }
+            }
+        });
+
+        for(int i=0;i<k;i++)
+            ans.add(list.get(i).key);
+
+        return ans;
+        
+    }
+}

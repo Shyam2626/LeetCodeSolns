@@ -1,0 +1,36 @@
+class Pair{
+    char ch;
+    int n;
+    Pair(char ch,int n){
+        this.ch=ch;
+        this.n=n;
+    }
+}
+
+class Solution {
+    public String frequencySort(String s) {
+        Map<Character,Integer> map=new HashMap<>();
+
+        for(char c: s.toCharArray())
+            map.put(c,map.getOrDefault(c,0)+1);
+
+        List<Pair> list=new ArrayList<>();
+        
+        for(char c : map.keySet())
+            list.add(new Pair(c,map.get(c)));
+
+        Collections.sort(list, new Comparator<Pair>() {
+            @Override
+            public int compare(Pair p1, Pair p2) {
+                return Integer.compare(p2.n, p1.n);
+            }
+        });
+
+        String ans="";
+
+        for(Pair pair : list)
+            ans+=(pair.ch+"").repeat(pair.n);
+
+        return ans;
+    }
+}

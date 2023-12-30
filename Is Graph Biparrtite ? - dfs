@@ -1,0 +1,32 @@
+class Solution
+{
+    public boolean isBipartite(int v, ArrayList<ArrayList<Integer>>adj)
+    {
+        int color[]=new int[v];
+        Arrays.fill(color,-1);
+        
+        for(int i=0;i<v;i++){
+            if(color[i]==-1){
+                if(!dfs(i,adj,color,0))
+                    return false;
+            }
+        }
+        return true;
+    }
+    
+    boolean dfs(int node,ArrayList<ArrayList<Integer>> adj,int[] color,int currColor){
+        color[node]=currColor;
+        List<Integer> currList=adj.get(node);
+        for(int num : currList){
+            
+            if(color[num]==-1){
+                if(!dfs(num,adj,color,1-currColor))
+                    return false;
+            }else if(currColor==color[num]){
+                return false;
+            }
+        }
+        
+        return true;
+    }
+}

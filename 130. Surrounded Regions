@@ -1,0 +1,32 @@
+class Solution {
+    public void solve(char[][] board) {
+        int m=board.length,n=board[0].length;
+        boolean[][] visited=new boolean[m][n];
+
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(board[i][j]=='O' && (i==0 || i==m-1 || j==0 || j==n-1) && !visited[i][j]){
+                    dfs(i,j,visited,board,m,n);
+                }
+            }
+        }
+
+        for(int i=0;i<m;i++)
+            for(int j=0;j<n;j++)
+                if(board[i][j]=='O' && !visited[i][j]) board[i][j]='X';
+    }
+
+    public void dfs(int r,int c,boolean[][] visited,char[][] board,int m,int n){
+        visited[r][c]=true;
+        int arr1[]={0,0,1,-1};
+        int arr2[]={1,-1,0,0};
+
+        for(int i=0;i<4;i++){
+            int nr=r+arr1[i];
+            int nc=arr2[i]+c;
+            if(nr>=0 &&  nr<m && nc>=0 && nc<n && board[nr][nc]=='O' && !visited[nr][nc]){
+                dfs(nr,nc,visited,board,m,n);
+            }
+        }
+    }
+}

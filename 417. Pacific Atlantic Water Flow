@@ -1,0 +1,62 @@
+class Solution {
+    public List<List<Integer>> pacificAtlantic(int[][] mat) {
+        
+        int m = mat.length;
+        int n = mat[0].length;
+        List<List<Integer>> ans=new ArrayList<>();
+
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                boolean pacific = dfsPacific(i,j,mat,m,n,new boolean[m][n]);
+                boolean atlantic = dfsAtlantic(i,j,mat,m,n,new boolean[m][n]);
+                if(pacific && atlantic)
+                    ans.add(Arrays.asList(i,j)); 
+            }
+        }
+        return ans;
+    }
+
+    public boolean dfsPacific(int r,int c,int[][] mat,int m,int n,boolean[][] visited){
+        if(r == 0 || c == 0)
+            return true;
+
+        visited[r][c]=true;
+
+        int arr1[]={-1,0,1,0};
+        int arr2[]={0,-1,0,1};
+
+        for(int i=0;i<4;i++){
+            int nr=r+arr1[i];
+            int nc=c+arr2[i];
+            if(nr>=0 && nr<m && nc>=0 && nc<n){
+                if(mat[nr][nc]<=mat[r][c] && !visited[nr][nc] && dfsPacific(nr,nc,mat,m,n,visited))
+            return true;
+                if(mat[nr][nc]<=mat[r][c] && !visited[nr][nc] && dfsPacific(nr,nc,mat,m,n,visited))
+            return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean dfsAtlantic(int r,int c,int[][] mat,int m,int n,boolean[][] visited){
+        if(r == m-1 || c == n-1)
+            return true;
+
+        visited[r][c]=true;
+
+        int arr1[]={-1,0,1,0};
+        int arr2[]={0,-1,0,1};
+
+        for(int i=0;i<4;i++){
+            int nr=r+arr1[i];
+            int nc=c+arr2[i];
+            if(nr>=0 && nr<m && nc>=0 && nc<n){
+                if(mat[nr][nc]<=mat[r][c] && !visited[nr][nc] && dfsAtlantic(nr,nc,mat,m,n,visited))
+                    return true;
+                if(mat[nr][nc]<=mat[r][c] && !visited[nr][nc] && dfsAtlantic(nr,nc,mat,m,n,visited))
+                    return true;
+            }
+        }
+        return false;
+    }
+}

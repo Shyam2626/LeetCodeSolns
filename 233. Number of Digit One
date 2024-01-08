@@ -1,0 +1,14 @@
+class Solution {
+    public int countDigitOne(int n) {
+        int count=0;
+
+        for(int pow = 1 ; pow <= n ; pow*=10){
+            long div = pow*10;
+            int q = (int)(n/div);
+            int r =(int)(n%div);
+            if(q>0) count+=(q*pow);
+            if(r>=pow) count+=Math.min(r-pow+1,pow);
+        }
+        return count;
+    }
+}

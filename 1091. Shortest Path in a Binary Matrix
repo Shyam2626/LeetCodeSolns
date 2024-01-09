@@ -1,0 +1,48 @@
+class Pair{
+    int st,ed,step;
+    Pair(int st,int ed,int step){
+        this.st = st;
+        this.ed = ed;
+        this.step = step;
+    }
+}
+
+class Solution {
+    public int shortestPathBinaryMatrix(int[][] grid) {
+
+        int m=grid.length,n=grid[0].length;
+
+        if(grid[0][0] == 1 || grid[m-1][n-1] == 1)
+            return -1;
+
+        Queue<Pair> q = new LinkedList<>();
+        q.offer(new Pair(0,0,1));
+        boolean[][] visited = new boolean[m][n];
+
+        visited[0][0] = true;
+
+        int arr1[]={0,0,-1,1,-1,-1,1,1};
+        int arr2[]={1,-1,0,0,-1,1,1,-1};
+
+        while(!q.isEmpty()){
+
+            int start = q.peek().st;
+            int end = q.peek().ed;
+            int weight = q.peek().step;
+            q.poll();
+
+            if(start==m-1 && end==n-1)
+                return weight;
+
+            for(int i=0;i<8;i++){
+                int r = start + arr1[i];
+                int c = end + arr2[i];
+                if(r>=0 && r<m && c>=0 && c<n && grid[r][c] == 0 && !visited[r][c]){
+                    visited[r][c] = true;
+                    q.offer(new Pair(r,c,weight+1));
+                }
+            }
+        }
+        return -1;
+    }
+}

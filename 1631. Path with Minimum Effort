@@ -1,0 +1,54 @@
+class Pair{
+    int distance,fst,sec;
+    Pair(int distance,int fst,int sec){
+        this.distance = distance;
+        this.fst = fst;
+        this.sec = sec;
+    }
+}
+
+class Solution {
+    public int minimumEffortPath(int[][] heights) {
+
+        int m = heights.length;
+        int n = heights[0].length;
+
+        PriorityQueue<Pair> q = new PriorityQueue<>((x,y) -> x.distance - y.distance);
+        q.offer(new Pair(0,0,0));
+
+        int dist[][] =new int[m][n];
+        for(int i=0;i<m;i++)
+            for(int j=0;j<n;j++)
+                dist[i][j] = Integer.MAX_VALUE;
+        dist[0][0] = 0;
+
+        int arr1[] = {0,0,-1,1};
+        int arr2[] = {-1,1,0,0};
+
+        while(!q.isEmpty()){
+            Pair currpair = q.poll();
+
+            int wt = currpair.distance;
+            int r = currpair.fst;
+            int c = currpair.sec;
+
+            if(r == m-1 && c == n-1)
+                return wt;
+
+            for(int i=0;i<4;i++){
+                int nr = r + arr1[i];
+                int nc = c + arr2[i];
+
+                if(nr>=0 && nr<m && nc>=0 && nc<n){
+                    int currMaxEffort = Math.max(Math.abs(heights[nr][nc]-heights[r][c]), wt);
+                    if(currMaxEffort < dist[nr][nc]){
+                        dist[nr][nc] = currMaxEffort;
+                        q.offer(new Pair(currMaxEffort,nr,nc));
+                    }
+                }
+            }
+        }
+       //dummy return
+        return 0;
+    }
+}

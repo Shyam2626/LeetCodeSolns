@@ -1,0 +1,35 @@
+class Solution {
+
+    public int maxAreaOfIsland(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        int maxArea = 0;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j] == 1){
+                    maxArea = Math.max(maxArea, dfs(grid,i,j,m,n,1));
+                }
+            }
+        }
+        return maxArea;
+    }
+
+    public int dfs(int[][] grid,int r,int c,int m,int n,int count){
+
+        grid[r][c] = 2;
+
+        int arr1[] = {0,0,-1,1};
+        int arr2[] = {-1,1,0,0};
+
+        for(int i=0;i<4;i++){
+
+            int nr = r + arr1[i];
+            int nc = c + arr2[i];
+
+            if(nr>=0 && nc>=0 && nr<m && nc<n && grid[nr][nc] == 1){
+                count = Math.max(count,dfs(grid,nr,nc,m,n,count+1));
+            }
+        }
+        return count;
+    }
+}

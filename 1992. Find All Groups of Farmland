@@ -1,0 +1,46 @@
+class Solution {
+    public int[][] findFarmland(int[][] land) {
+
+        int m = land.length;
+        int n = land[0].length;
+
+        List<int[]> ans = new ArrayList<>();
+
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(land[i][j] == 1){
+                    int end[] = dfs(land,i,j,i,j,m,n,i,j);
+                    ans.add(new int[] {i , j , end[0] , end[1]});
+                }
+            }
+        }
+
+        if(ans.size() == 0) return new int[0][0];
+        return ans.stream().map(i->i).toArray(int[][] :: new);
+        
+    }
+
+    public int[] dfs(int[][] land,int r,int c,int baseR,int baseC,int m,int n,int maxR,int maxC){
+
+        land[r][c] = 2;
+
+        maxR = Math.max(maxR,r);
+        maxC = Math.max(maxC,c);
+
+        int arr1[] = {0,1};
+        int arr2[] = {1,0};
+
+        for(int i=0;i<2;i++){
+            
+            int nr = r + arr1[i];
+            int nc = c + arr2[i];
+
+            if(nr>=0 && nc>=0 && nr<m && nc<n && land[nr][nc] == 1){
+                int end[] = dfs(land,nr,nc,baseR,baseC,m,n,maxR,maxC);
+                maxR = Math.max(maxR,end[0]);
+                maxC = Math.max(maxC,end[1]);
+            }
+        }
+        return new int[]{maxR,maxC};
+    }
+}

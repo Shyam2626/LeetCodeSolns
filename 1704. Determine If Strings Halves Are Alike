@@ -1,0 +1,22 @@
+import java.util.Arrays;
+
+class Solution {
+    public boolean halvesAreAlike(String s) {
+
+        int c1 = 0, c2 = 0;
+        int l = 0 , r = s.length()-1;
+
+        while(l<r){
+            if(checkVowel(s.charAt(l)))
+                c1++;
+            if(checkVowel(s.charAt(r)))
+                c2++;
+            l++;
+            r--;
+        }
+        return c1 == c2;
+    }
+    public boolean checkVowel(char ch){
+        return "aeiouAEIOU".contains(ch+"");
+    }
+}
